@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+     <div>
+         <label class="search-button">Search</label>
+    </div>
+    <div>
+        <input class="search-field" type="search" data-bind="value: searchField, valueUpdate: 'keyup'">
+    </div>
+    <div class="content">
+        <ul data-bind="foreach: filterMarkers">
+            <li class="task-item">
+                <span onclick="animatePoint(this)"
+                      data-bind="text: ko.unwrap($data)[0]"></span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="map"></div>
+    <div></div>
+    <div id="placeInfo"></div>
+</div>
+
+
+<script src="map.js"></script>
+<script src="forsquare.js"></script>
+
+<script src="knockout-3.4.2.js"></script>
+<script src="index.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmvrN4S1IaAsmG32VYTDCDHchyl531P8&callback=initMap">
+</script>
+</body>
+</html>
