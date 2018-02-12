@@ -17,7 +17,7 @@ function showForsquareInfo(lat, lang, name){
             info += '<p> <strong>Venue phone number: </strong>' + data.response.venues[0].contact.formattedPhone + '</p>';
           }
           $('#placeInfo').append(info);
-          resolve(id)
+          resolve(id);
         }
 
       });
@@ -29,7 +29,7 @@ function showForsquareInfo(lat, lang, name){
       if(typeof data.response.photos.items[0] != 'undefined') {
         photoUrl = data.response.photos.items[0].prefix + 'original' + data.response.photos.items[0].suffix;
       } else {
-        photoUrl = ""
+        photoUrl = "";
       }
       if (typeof photoUrl !== 'undefined') {
         //Appends information on the venue to the document
@@ -39,7 +39,7 @@ function showForsquareInfo(lat, lang, name){
         } else {
           info += '<p>No Forsquare photos for this location. </p>';
         }
-        $('#placeInfo').append(info)
+        $('#placeInfo').append(info);
       }
       return Promise.resolve(photoUrl);
     });

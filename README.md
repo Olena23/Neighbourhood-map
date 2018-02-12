@@ -1,4 +1,4 @@
-##Neighbourhood map
+## Neighbourhood map
 This project represents a map of the city area with marked important objects.
 You can click on the object on the map or on the object in the list to see its information and image below.
 

@@ -17,7 +17,7 @@ function animatePoint(name) {
       setTimeout(function(){ points[item].setAnimation(null); }, 750);
     }
   }
-}
+};
 
 //Creates map with custom markers
 function initMap() {
