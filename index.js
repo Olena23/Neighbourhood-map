@@ -1,5 +1,5 @@
 //Holds default or rendered (when filter is used) markers
-let real_markers = [
+let realMarkers = [
   ['Studentska', 50.017720, 36.329984],
   ['Skovoroda Kharkiv National Pedagogical University', 50.019857, 36.317853],
   ['Radmir Expohall', 50.010050, 36.317890],
@@ -12,6 +12,7 @@ let real_markers = [
 function AppViewModel() {
   var self = this;
   self.searchField = ko.observable("");
+  self.placeCard = ko.observable("");
 
   self.markers = ko.observableArray([
     ['Studentska', 50.017720, 36.329984],
@@ -25,27 +26,36 @@ function AppViewModel() {
   //Filters markers according to the text in the search field
   self.filterMarkers = ko.computed(
     function () {
+      let hiddenMarkers = [];
       let search = self.searchField().toLowerCase();
       if (search.length == 0) {
         if(typeof google != 'undefined'){
           //Displays original markers
-          real_markers = ko.unwrap(self.markers);
-          initMap();
+          realMarkers = ko.unwrap(self.markers);
+          console.log(ko.unwrap(self.markers))
+          updateMarkers(realMarkers)
         }
         return ko.unwrap(self.markers);
       }
 
       //Filtered markers
-        new_markers = ko.utils.arrayFilter(ko.unwrap(self.markers), function (marker) {
-          real_markers = ko.unwrap(self.markers);
+      hiddenMarkers = ko.utils.arrayFilter(ko.unwrap(self.markers), function (marker) {
+          realMarkers = ko.unwrap(self.markers);
           return marker[0].toLowerCase().indexOf(search) >= 0;
         });
-        real_markers = new_markers;
         //Re-initializes the map to show only filtered markers
-        initMap();
-        return new_markers;
+
+      /*  initMap();*/
+        /*return newMarkers;*/
+      newMarkers = hiddenMarkers;
+      updateMarkers(hiddenMarkers)
+      return newMarkers;
     });
 
+  self.placeCard = ko.computed(function() {
+    return info;
+
+  });
 
 }
 

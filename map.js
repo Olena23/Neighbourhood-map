@@ -3,10 +3,15 @@ var map = {};
 //Created markers on the map
 let points = [];
 
+function errorHandling() {
+  alert("Cannot load map!")
+};
+
 //Animates marker that corresponds to the clicked list item
 function animatePoint(name) {
   for (let item in points){
-    if (points[item].title == name.innerHTML) {
+    console.log(name)
+    if (points[item].title == name) {
       points[item].setAnimation(google.maps.Animation.BOUNCE);
       showForsquareInfo(
         points[item].getPosition().lat(),
@@ -14,10 +19,27 @@ function animatePoint(name) {
         points[item].getTitle()
       );
       //Makes the marker bounce only once
-      setTimeout(function(){ points[item].setAnimation(null); }, 750);
+      setTimeout(function(){ points[item].setAnimation(null); }, 700);
     }
   }
 };
+
+function updateMarkers(markers) {
+  for (let i in points){
+    let isVisible = false;
+     for (let item in markers){
+      if (points[i].title == markers[item][0]){
+        isVisible = true;
+      }
+    }
+    if (isVisible) {
+      points[i].setMap(map);
+    } else {
+      points[i].setMap(null);
+    }
+  }
+};
+
 
 //Creates map with custom markers
 function initMap() {
@@ -28,11 +50,12 @@ function initMap() {
   });
 
   function setMarkers(map) {
+    console.log('setMarkers');
   //Empties point array
     points = [];
     // Adds markers to the map.
-    for (let i = 0; i < real_markers.length; i++) {
-      let marker = real_markers[i];
+    for (let i = 0; i < realMarkers.length; i++) {
+      let marker = realMarkers[i];
       let point = new google.maps.Marker({
         position: {lat: marker[1], lng: marker[2]},
         map: map,
@@ -43,6 +66,7 @@ function initMap() {
       points.push(point);
       //Defines marker animation on click
       point.addListener('click', function () {
+        console.log('addanimation')
         if (point.getAnimation() !== null) {
           point.setAnimation(null);
         } else {
@@ -50,7 +74,7 @@ function initMap() {
           point.setAnimation(google.maps.Animation.BOUNCE);
           showForsquareInfo(point.getPosition().lat(), point.getPosition().lng(), point.getTitle());
           //Makes the marker bounce only once
-          setTimeout(function(){ point.setAnimation(null); }, 750);
+          setTimeout(function(){ point.setAnimation(null); }, 700);
         }
         //Adds marker objects to array
       });
@@ -61,5 +85,6 @@ function initMap() {
   setMarkers(map);
 
 }
+
 
 
