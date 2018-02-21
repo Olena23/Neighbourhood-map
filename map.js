@@ -1,8 +1,4 @@
-var renderedMarkers = [];
-var map = {};
-//Created markers on the map
-let points = [];
-
+//Error handling function
 function errorHandling() {
   alert("Cannot load map!")
 };
@@ -10,7 +6,6 @@ function errorHandling() {
 //Animates marker that corresponds to the clicked list item
 function animatePoint(name) {
   for (let item in points){
-    console.log(name)
     if (points[item].title == name) {
       points[item].setAnimation(google.maps.Animation.BOUNCE);
       showForsquareInfo(
@@ -50,7 +45,6 @@ function initMap() {
   });
 
   function setMarkers(map) {
-    console.log('setMarkers');
   //Empties point array
     points = [];
     // Adds markers to the map.
@@ -66,7 +60,6 @@ function initMap() {
       points.push(point);
       //Defines marker animation on click
       point.addListener('click', function () {
-        console.log('addanimation')
         if (point.getAnimation() !== null) {
           point.setAnimation(null);
         } else {
@@ -86,5 +79,16 @@ function initMap() {
 
 }
 
+let final = "55"
+console.log()
 
+/*var fileInterval = setInterval(function(){
+  if (AppViewModel){
+    // do something
+    clearInterval(fileInterval); // clear interval
+  }
+},100);
 
+var viewModel = new AppViewModel()*/
+/*
+ko.applyBindings(viewModel);*/

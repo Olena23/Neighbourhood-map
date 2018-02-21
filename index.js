@@ -1,3 +1,13 @@
+//Initializing global variables
+let id = '';
+let photoUrl = '';
+let info = '';
+let renderedMarkers = [];
+let map = {};
+//Created markers on the map
+let points = [];
+
+
 //Holds default or rendered (when filter is used) markers
 let realMarkers = [
   ['Studentska', 50.017720, 36.329984],
@@ -13,7 +23,7 @@ function AppViewModel() {
   var self = this;
   self.searchField = ko.observable("");
   self.placeCard = ko.observable("");
-
+  self.finalText = ko.observable("");
   self.markers = ko.observableArray([
     ['Studentska', 50.017720, 36.329984],
     ['Skovoroda Kharkiv National Pedagogical University', 50.019857, 36.317853],
@@ -57,7 +67,35 @@ function AppViewModel() {
 
   });
 
+
+
+
+  //Observables for venue infrormation fields
+  self.venueName = ko.observable("");
+  self.venueNameText = ko.observable("");
+  self.venueAddress = ko.observable("");
+  self.venueAddressText = ko.observable("");
+  self.venuePhone = ko.observable("");
+  self.venuePhoneNumber = ko.observable("");
+  self.venuePhoto = ko.observable("");
+  self.venuePhotoImg = ko.observable("");
+
 }
 
+
 // Activates knockout.js
-ko.applyBindings(new AppViewModel());
+let viewModel = new AppViewModel();
+ko.applyBindings(viewModel);
+
+
+
+
+/*
+
+var viewModel = {
+  textField: ko.observable(),
+};
+
+viewModel.textField(info);
+
+ko.applyBindings(viewModel);*/

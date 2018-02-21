@@ -1,7 +1,3 @@
-let id = '';
-let photoUrl = '';
-let info = '';
-
 function showForsquareInfo(lat, lang, name){
   return new Promise (function(resolve, reject){
     $('#placeInfo').text("");
@@ -13,13 +9,16 @@ function showForsquareInfo(lat, lang, name){
       function(data) {
         id = data.response.venues[0].id;
         if (id.length !== 0){
-          info = '<p> <strong>Venue name: </strong>' + data.response.venues[0].name + '</p>' +
-            '<p> <strong>Venue address: </strong>' + data.response.venues[0].location.formattedAddress + '</p>';
+          viewModel.venueName('Venue name: ');
+          viewModel.venueNameText(data.response.venues[0].name);
+          viewModel.venueAddress('Venue address: ');
+          viewModel.venueAddressText(data.response.venues[0].location.formattedAddress);
           //Shows phone number if defined
           if (typeof data.response.venues[0].contact.formattedPhone != 'undefined'){
-            info += '<p> <strong>Venue phone number: </strong>' + data.response.venues[0].contact.formattedPhone + '</p>';
+            viewModel.venuePhone('Venue phone number: ');
+            viewModel.venuePhoneNumber(data.response.venues[0].contact.formattedPhone);
           }
-          $('#placeInfo').append(info);
+         viewModel.finalText(info);
           resolve(id);
         }
       }
@@ -39,13 +38,13 @@ function showForsquareInfo(lat, lang, name){
       }
       if (typeof photoUrl !== 'undefined') {
         //Appends information on the venue to the document
-         info = "";
         if (photoUrl.length > 0) {
-          info += '<p><img alt="Venue photo" src=' + photoUrl + '/></p>';
+          viewModel.venuePhoto ('Venue photo: ');
+          viewModel.venuePhotoImg(photoUrl);
         } else {
-          info += '<p>No Forsquare photos for this location. </p>';
+          viewModel.venuePhoto ('Venue photo: No Forsquare photos for this location.');
+          viewModel.venuePhotoImg("");
         }
-        $('#placeInfo').append(info);
       }
       return Promise.resolve(photoUrl);
     }).fail(function() {
@@ -53,3 +52,4 @@ function showForsquareInfo(lat, lang, name){
     });
   });
 }
+

@@ -29,7 +29,7 @@
     padding: 10px;
 }
 
-#placeInfo img {
+.venue-img {
     max-width: 100%;
     max-height: 300px;
 }

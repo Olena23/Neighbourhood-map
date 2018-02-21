@@ -21,19 +21,21 @@
             </li>
         </ul>
     </div>
-
-
     <div id="map"></div>
     <div></div>
-    <div id="placeInfo"></div>
+    <div>
+        <p> <strong data-bind="text: venueName"></strong> <span data-bind="text: venueNameText"></span></p>
+        <p> <strong data-bind="text: venueAddress"></strong> <span data-bind="text: venueAddressText"></span></p>
+        <p> <strong data-bind="text: venuePhone"></strong> <span data-bind="text: venuePhoneNumber"></span></p>
+        <p> <strong data-bind="text: venuePhoto"></strong></p>
+        <p><img class= "venue-img" data-bind="attr: { src: venuePhotoImg }"/></p>
+    </div>
 </div>
-
-
-<script src="map.js"></script>
-<script src="forsquare.js"></script>
 
 <script src="knockout-3.4.2.js"></script>
 <script src="index.js"></script>
+<script src="map.js"></script>
+<script src="forsquare.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmvrN4S1IaAsmG32VYTDCDHchyl531P8&callback=initMap" onerror="errorHandling()">
 </script>
